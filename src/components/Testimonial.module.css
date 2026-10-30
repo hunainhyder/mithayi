@@ -1,0 +1,75 @@
+.section {
+  padding-block: clamp(64px, 8vw, 112px);
+  background: var(--green);
+  color: #fff;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.mark {
+  color: var(--gold);
+}
+
+.eyebrow {
+  margin-top: 16px;
+  color: var(--gold);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.stars {
+  display: flex;
+  gap: 3px;
+  margin-top: 18px;
+  color: var(--gold);
+}
+
+.quote {
+  max-width: 46rem;
+  margin: 26px 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.875rem, 3.4vw, 3.125rem);
+  line-height: 1.12;
+}
+
+.author {
+  margin-top: 28px;
+  color: rgb(255 255 255 / 0.65);
+  font-size: 0.75rem;
+}
+
+.author strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.45);
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+}
+
+.count {
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
