@@ -1,0 +1,33 @@
+.bar {
+  background: var(--burgundy-deep);
+  color: #fff;
+  padding: 9px var(--gutter);
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(24px, 5vw, 80px);
+}
+
+.item {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.item + .item::before {
+  content: "+";
+  color: var(--gold);
+  margin-right: clamp(24px, 5vw, 80px);
+}
+
+@media (max-width: 760px) {
+  /* Keep a single message on small screens */
+  .item:not(:first-child) {
+    display: none;
+  }
+}
