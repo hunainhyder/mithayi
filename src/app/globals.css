@@ -1,11 +1,104 @@
+:root {
+  --cream: #faf6ef;
+  --sand: #f2e8df;
+  --burgundy: #7a2b38;
+  --burgundy-deep: #6c2434;
+  --green: #24493b;
+  --gold: #b8914f;
+  --ink: #2b1b1b;
+  --muted: #7a6a68;
+  --line: #e2d2c4;
+
+  --font-serif: var(--font-display), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-body), "DM Sans", system-ui, sans-serif;
+
+  --gutter: clamp(20px, 5vw, 80px);
+  --container: 1360px;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1;
+}
+
+h1 em,
+h2 em,
+h3 em {
+  color: var(--burgundy);
+  font-style: italic;
+}
+
+.container {
+  width: min(var(--container), 100% - 2 * var(--gutter));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 4.6vw, 4.25rem);
 }
