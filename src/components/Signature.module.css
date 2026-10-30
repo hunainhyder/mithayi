@@ -1,0 +1,141 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(64px, 8vw, 120px);
+  background: var(--sand);
+}
+
+.watermark {
+  position: absolute;
+  right: -90px;
+  bottom: -110px;
+  color: #ecdcc4;
+  pointer-events: none;
+}
+
+.layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 600px) minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(48px, 9vw, 160px);
+}
+
+.frame {
+  position: relative;
+  padding: 24px;
+  border: 1px solid var(--gold);
+}
+
+/* Offset second outline peeking out of the top-right corner */
+.frame::before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  left: 32%;
+  height: 46%;
+  border-top: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+  pointer-events: none;
+}
+
+.photo {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.badge {
+  position: absolute;
+  right: -40px;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: var(--burgundy);
+  color: #fff;
+  box-shadow: 0 10px 24px rgb(90 30 40 / 0.25);
+}
+
+.badge span {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-transform: uppercase;
+  rotate: -12deg;
+}
+
+.badge svg {
+  color: var(--gold);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+}
+
+.text {
+  max-width: 28rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.85;
+}
+
+.perks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 26px;
+}
+
+.perks li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.perkIcon {
+  color: var(--gold);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--burgundy);
+  color: var(--burgundy);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 56px;
+  }
+
+  .frame {
+    margin-right: 28px;
+  }
+
+  .badge {
+    right: -28px;
+  }
+}
