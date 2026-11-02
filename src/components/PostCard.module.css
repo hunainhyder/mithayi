@@ -1,0 +1,42 @@
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.thumb {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.04);
+}
+
+.meta {
+  display: flex;
+  gap: 14px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin-top: 10px;
+  font-size: 1.875rem;
+  line-height: 1.1;
+}
+
+.excerpt {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
