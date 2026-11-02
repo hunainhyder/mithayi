@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Collections from "@/components/Collections";
 import Festive from "@/components/Festive";
@@ -21,12 +22,16 @@ export default function Home() {
       <main>
         <Hero />
         <Marquee />
-        <Collections />
+        <Suspense>
+          <Collections />
+        </Suspense>
         <Signature />
         <Gifting />
         <Festive />
         <Story />
-        <ProductCollection />
+        <Suspense>
+          <ProductCollection />
+        </Suspense>
         <Occasions />
         <Testimonial />
         <InstagramFeed />

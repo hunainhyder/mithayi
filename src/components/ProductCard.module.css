@@ -3,10 +3,16 @@
   flex-direction: column;
 }
 
+.link {
+  display: flex;
+  flex-direction: column;
+}
+
 .thumb {
   position: relative;
   aspect-ratio: 239 / 284;
   overflow: hidden;
+  background: var(--line);
 }
 
 .image {
@@ -14,7 +20,7 @@
   transition: transform 0.6s ease;
 }
 
-.card:hover .image {
+.link:hover .image {
   transform: scale(1.04);
 }
 
@@ -31,24 +37,11 @@
   text-transform: uppercase;
 }
 
-.wish {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: var(--cream);
-}
-
 .meta {
   display: flex;
   align-items: center;
   gap: 5px;
+  min-height: 1.2em;
   margin-top: 18px;
   color: var(--muted);
   font-size: 0.6875rem;
@@ -75,8 +68,17 @@
 }
 
 .price {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
   margin-top: 14px;
   color: var(--burgundy);
   font-size: 0.8125rem;
   font-weight: 700;
+}
+
+.was {
+  color: var(--muted);
+  font-weight: 400;
+  text-decoration: line-through;
 }

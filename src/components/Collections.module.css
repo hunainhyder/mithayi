@@ -31,6 +31,7 @@
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
+  background: var(--line);
 }
 
 .image {
