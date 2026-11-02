@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { navLinks } from "@/data/site";
-import { BagIcon, ChevronDownIcon, SearchIcon } from "./Icons";
+import CartButton from "./CartButton";
+import { ChevronDownIcon, SearchIcon } from "./Icons";
 import styles from "./Header.module.css";
 
 export default function Header() {
@@ -25,10 +26,7 @@ export default function Header() {
           <Link href="/products#search" className={styles.iconButton} aria-label="Search">
             <SearchIcon size={18} />
           </Link>
-          <button type="button" className={styles.iconButton} aria-label="Cart, 0 items">
-            <BagIcon size={18} />
-            <span className={styles.count}>0</span>
-          </button>
+          <CartButton />
         </div>
       </div>
     </header>
