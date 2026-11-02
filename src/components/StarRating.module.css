@@ -1,0 +1,26 @@
+.rating {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.empty,
+.filled {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.empty {
+  color: var(--line);
+}
+
+.filled {
+  position: absolute;
+  inset: 0 auto 0 0;
+  overflow: hidden;
+  color: var(--gold);
+}
+
+.filled > svg {
+  flex-shrink: 0;
+}
