@@ -101,6 +101,9 @@ export default function CartView() {
           </div>
         </dl>
         <PromoCode />
+        <Link href="/checkout" className={styles.checkout}>
+          Proceed to checkout
+        </Link>
         <p className={styles.note}>Shipping is added at checkout.</p>
       </aside>
     </div>

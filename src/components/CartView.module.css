@@ -195,3 +195,21 @@
   border-top: 1px solid var(--line);
   font-weight: 700;
 }
+
+.checkout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  margin-top: 20px;
+  background: var(--burgundy);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.checkout:hover {
+  background: var(--burgundy-deep);
+}

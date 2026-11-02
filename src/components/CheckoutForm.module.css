@@ -1,0 +1,138 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+
+.heading,
+.summary h2 {
+  font-size: 1.75rem;
+}
+
+.shipping {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.shipping legend {
+  margin-bottom: 8px;
+  padding: 0;
+}
+
+.method {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.method:has(input:checked) {
+  border-color: var(--burgundy);
+}
+
+.method small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.summary {
+  position: sticky;
+  top: 110px;
+  padding: 28px;
+  background: var(--sand);
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.875rem;
+}
+
+.items li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.items small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.totals {
+  margin: 16px 0 0;
+}
+
+.totals div {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 6px;
+  font-size: 0.875rem;
+}
+
+.totals dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.grand {
+  margin-top: 6px;
+  padding-top: 14px !important;
+  border-top: 1px solid var(--line);
+  font-weight: 700;
+}
+
+.errorList {
+  margin-top: 6px;
+  padding-left: 18px;
+  list-style: disc;
+}
+
+.empty,
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 520px;
+  margin-inline: auto;
+  padding-block: 48px;
+}
+
+.empty {
+  align-items: center;
+  color: var(--muted);
+}
+
+.confirmation .totals {
+  width: 100%;
+  padding: 20px;
+  background: var(--sand);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .summary {
+    position: static;
+    order: -1;
+  }
+}
