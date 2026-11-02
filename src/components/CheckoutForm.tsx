@@ -44,7 +44,7 @@ export default function CheckoutForm() {
         product_variant_id: line.product_variant_id,
         quantity: line.quantity,
       })),
-      shipping_method: shipping.label,
+      shipping_method: shipping.id,
       shipping_cost: shipping.cost,
       ...(promo && { coupon_code: promo.code }),
     };

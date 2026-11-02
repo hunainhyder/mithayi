@@ -35,4 +35,4 @@ The settings API is intentionally not integrated yet.
 - `src/lib/api.ts` fetch client, error classes, query helper
 - `src/lib/data.ts` cached read fetchers (`use cache`)
 - `src/lib/cart-store.ts` cart and promo state in `localStorage`
-- `src/data/shipping.ts` shipping options (placeholder rates, set the real ones)
+- `src/data/shipping.ts` shipping options sent to checkout
