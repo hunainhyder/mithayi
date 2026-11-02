@@ -22,16 +22,19 @@ export const footerColumns = [
   {
     title: "Explore",
     links: [
-      { label: "Shop all", href: "#collections" },
-      { label: "Gifting", href: "#gifting" },
-      { label: "Best sellers", href: "#favourites" },
+      { label: "Shop all", href: "/products" },
+      { label: "Gifting", href: "/#gifting" },
+      { label: "Best sellers", href: "/#favourites" },
+      { label: "Your cart", href: "/cart" },
     ],
   },
   {
     title: "The little details",
     links: [
-      { label: "Our story", href: "#story" },
-      { label: "Collections", href: "#collections" },
+      { label: "Our story", href: "/#story" },
+      { label: "Journal", href: "/blog" },
+      { label: "FAQs", href: "/faqs" },
+      { label: "Contact", href: "/contact" },
       { label: "Back to top", href: "#top" },
     ],
   },
