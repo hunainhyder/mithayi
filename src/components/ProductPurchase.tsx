@@ -17,6 +17,11 @@ export default function ProductPurchase({ product }: { product: Product }) {
   const variants = (product.variants ?? []).filter((v) => v.is_active);
   const hasVariants = attributes.length > 0 && variants.length > 0;
 
+  // Attribute configs list every value in the catalogue; only offer the ones this product uses
+  const usedValueIds = new Set(
+    variants.flatMap((v) => v.attributes.map((a) => a.attribute_value_id)),
+  );
+
   const attributeOfValue = new Map<number, number>();
   attributes.forEach((attr) =>
     attr.values.forEach((value) => attributeOfValue.set(value.id, attr.id)),
@@ -171,7 +176,9 @@ export default function ProductPurchase({ product }: { product: Product }) {
                 )}
               </legend>
               <div className={styles.options}>
-                {attr.values.map((value) => {
+                {attr.values
+                  .filter((value) => usedValueIds.has(value.id))
+                  .map((value) => {
                   const available = isAvailable(attr.id, value.id);
                   const active = selected[attr.id] === value.id;
                   return (
