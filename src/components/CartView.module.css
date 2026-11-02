@@ -188,3 +188,10 @@
     grid-column: 2;
   }
 }
+
+.grand {
+  margin-top: 6px;
+  padding-top: 14px !important;
+  border-top: 1px solid var(--line);
+  font-weight: 700;
+}

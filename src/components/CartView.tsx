@@ -2,13 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCart, useHydrated } from "@/hooks/useCart";
+import { useCart, useHydrated, usePromo } from "@/hooks/useCart";
 import { formatPrice } from "@/lib/format";
+import PromoCode from "./PromoCode";
 import styles from "./CartView.module.css";
 
 export default function CartView() {
   const hydrated = useHydrated();
   const { items, subtotal, setQuantity, removeItem } = useCart();
+  const { promo } = usePromo();
+  const discount = promo?.discountAmount ?? 0;
 
   if (!hydrated) {
     return <div className={styles.loading} aria-hidden="true" />;
@@ -86,8 +89,19 @@ export default function CartView() {
             <dt>Subtotal</dt>
             <dd>{formatPrice(subtotal)}</dd>
           </div>
+          {promo && (
+            <div>
+              <dt>Discount ({promo.code})</dt>
+              <dd>−{formatPrice(discount)}</dd>
+            </div>
+          )}
+          <div className={styles.grand}>
+            <dt>Total before shipping</dt>
+            <dd>{formatPrice(Math.max(0, subtotal - discount))}</dd>
+          </div>
         </dl>
-        <p className={styles.note}>Shipping and promo codes are applied at checkout.</p>
+        <PromoCode />
+        <p className={styles.note}>Shipping is added at checkout.</p>
       </aside>
     </div>
   );

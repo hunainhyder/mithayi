@@ -3,12 +3,18 @@
 import { useSyncExternalStore } from "react";
 import {
   addItem,
+  applyPromo,
+  cartSignature,
   clearCart,
+  clearPromo,
+  getPromoSnapshot,
+  getServerPromoSnapshot,
   getServerSnapshot,
   getSnapshot,
   removeItem,
   setQuantity,
   subscribe,
+  subscribePromo,
 } from "@/lib/cart-store";
 
 const noopSubscribe = () => () => {};
@@ -34,4 +40,13 @@ export function useCart() {
     removeItem,
     clearCart,
   };
+}
+
+/** The applied promo, or null when none is set or the cart changed since it was validated. */
+export function usePromo() {
+  const { items } = useCart();
+  const stored = useSyncExternalStore(subscribePromo, getPromoSnapshot, getServerPromoSnapshot);
+  const active = stored && stored.signature === cartSignature(items) ? stored : null;
+
+  return { promo: active, stale: stored !== null && active === null, applyPromo, clearPromo };
 }

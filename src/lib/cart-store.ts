@@ -112,4 +112,72 @@ export function removeItem(key: string) {
 
 export function clearCart() {
   commit(EMPTY);
+  clearPromo();
+}
+
+// --- Applied promo code -------------------------------------------------------
+// Stored with a signature of the cart it was validated against, so changing the
+// cart makes the stored discount stale instead of silently wrong.
+
+export interface AppliedPromo {
+  code: string;
+  description: string;
+  discountAmount: number;
+  signature: string;
+}
+
+const PROMO_KEY = "mithayi-promo";
+let promo: AppliedPromo | null = null;
+let promoLoaded = false;
+const promoListeners = new Set<() => void>();
+
+export function cartSignature(lines: CartItem[]): string {
+  return lines.map((line) => `${line.key}x${line.quantity}`).join("|");
+}
+
+function loadPromo() {
+  if (promoLoaded || typeof window === "undefined") return;
+  promoLoaded = true;
+  try {
+    const raw = localStorage.getItem(PROMO_KEY);
+    promo = raw ? JSON.parse(raw) : null;
+  } catch {
+    promo = null;
+  }
+}
+
+function commitPromo(next: AppliedPromo | null) {
+  promo = next;
+  try {
+    if (next) localStorage.setItem(PROMO_KEY, JSON.stringify(next));
+    else localStorage.removeItem(PROMO_KEY);
+  } catch {
+    // Ignore storage failures; the promo then only lasts for this session
+  }
+  promoListeners.forEach((listener) => listener());
+}
+
+export function subscribePromo(listener: () => void) {
+  loadPromo();
+  promoListeners.add(listener);
+  return () => {
+    promoListeners.delete(listener);
+  };
+}
+
+export function getPromoSnapshot(): AppliedPromo | null {
+  loadPromo();
+  return promo;
+}
+
+export function getServerPromoSnapshot(): AppliedPromo | null {
+  return null;
+}
+
+export function applyPromo(next: AppliedPromo) {
+  commitPromo(next);
+}
+
+export function clearPromo() {
+  commitPromo(null);
 }
