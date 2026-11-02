@@ -1,10 +1,7 @@
 import { Suspense } from "react";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Collections from "@/components/Collections";
 import Festive from "@/components/Festive";
-import Footer from "@/components/Footer";
 import Gifting from "@/components/Gifting";
-import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import InstagramFeed from "@/components/InstagramFeed";
 import Marquee from "@/components/Marquee";
@@ -17,26 +14,21 @@ import Testimonial from "@/components/Testimonial";
 export default function Home() {
   return (
     <>
-      <AnnouncementBar />
-      <Header />
-      <main>
-        <Hero />
-        <Marquee />
-        <Suspense>
-          <Collections />
-        </Suspense>
-        <Signature />
-        <Gifting />
-        <Festive />
-        <Story />
-        <Suspense>
-          <ProductCollection />
-        </Suspense>
-        <Occasions />
-        <Testimonial />
-        <InstagramFeed />
-      </main>
-      <Footer />
+      <Hero />
+      <Marquee />
+      <Suspense>
+        <Collections />
+      </Suspense>
+      <Signature />
+      <Gifting />
+      <Festive />
+      <Story />
+      <Suspense>
+        <ProductCollection />
+      </Suspense>
+      <Occasions />
+      <Testimonial />
+      <InstagramFeed />
     </>
   );
 }

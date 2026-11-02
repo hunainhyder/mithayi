@@ -1,0 +1,104 @@
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+  padding-block: 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.search {
+  flex: 1 1 260px;
+}
+
+.label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.form input,
+.form select {
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+.form input:focus,
+.form select:focus {
+  outline: 2px solid var(--burgundy);
+  outline-offset: -1px;
+}
+
+.searchInput {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.searchInput input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  padding-left: 0;
+}
+
+.searchInput input:focus {
+  outline: none;
+}
+
+.searchInput:focus-within {
+  outline: 2px solid var(--burgundy);
+  outline-offset: -1px;
+}
+
+.range {
+  display: flex;
+  gap: 8px;
+}
+
+.range input {
+  width: 96px;
+}
+
+.apply {
+  height: 44px;
+  padding: 0 28px;
+  border: 1px solid var(--burgundy);
+  background: var(--burgundy);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.apply:hover {
+  background: var(--burgundy-deep);
+}
+
+@media (max-width: 700px) {
+  .field,
+  .price,
+  .range {
+    flex: 1 1 100%;
+  }
+
+  .range input {
+    flex: 1;
+    width: auto;
+  }
+}

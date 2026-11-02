@@ -7,9 +7,9 @@ export const announcements = [
 ];
 
 export const navLinks: NavLink[] = [
-  { label: "Shop", href: "#collections", hasMenu: true },
-  { label: "Gifting", href: "#gifting" },
-  { label: "Our Story", href: "#story" },
+  { label: "Shop", href: "/products", hasMenu: true },
+  { label: "Gifting", href: "/#gifting" },
+  { label: "Our Story", href: "/#story" },
 ];
 
 export const marqueeItems = [

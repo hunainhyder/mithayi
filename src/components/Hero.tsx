@@ -5,7 +5,7 @@ import styles from "./Hero.module.css";
 
 export default function Hero() {
   return (
-    <section id="top" className={styles.hero}>
+    <section className={styles.hero}>
       <div className={styles.media}>
         <Image
           src="/images/hero.jpg"

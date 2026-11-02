@@ -102,3 +102,15 @@ h3 em {
 .section-title {
   font-size: clamp(2.5rem, 4.6vw, 4.25rem);
 }
+
+.pageBody {
+  padding-bottom: clamp(64px, 8vw, 112px);
+}
+
+.resultCount {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

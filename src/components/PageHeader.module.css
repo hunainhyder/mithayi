@@ -1,0 +1,48 @@
+.header {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(48px, 6vw, 88px) clamp(28px, 3vw, 40px);
+  background: var(--sand);
+  text-align: center;
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.description {
+  max-width: 38rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.withImage {
+  padding-block: clamp(72px, 9vw, 140px);
+  color: #fff;
+}
+
+.withImage :global(.eyebrow) {
+  color: var(--gold);
+}
+
+.withImage h1 em {
+  color: var(--gold);
+}
+
+.withImage .description {
+  color: rgb(255 255 255 / 0.85);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(52 20 28 / 0.62);
+}

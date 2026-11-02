@@ -16,15 +16,15 @@ export default function Header() {
           ))}
         </nav>
 
-        <Link href="#top" className={styles.logo} aria-label="Mithayi home">
+        <Link href="/" className={styles.logo} aria-label="Mithayi home">
           <span className={styles.wordmark}>Mithayi</span>
           <span className={styles.tagline}>Est. with love</span>
         </Link>
 
         <div className={styles.actions}>
-          <button type="button" className={styles.iconButton} aria-label="Search">
+          <Link href="/products#search" className={styles.iconButton} aria-label="Search">
             <SearchIcon size={18} />
-          </button>
+          </Link>
           <button type="button" className={styles.iconButton} aria-label="Cart, 0 items">
             <BagIcon size={18} />
             <span className={styles.count}>0</span>

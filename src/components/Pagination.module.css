@@ -1,0 +1,35 @@
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 56px;
+}
+
+.page,
+.step {
+  display: grid;
+  place-items: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.page:hover,
+.step:hover {
+  border-color: var(--burgundy);
+}
+
+.current {
+  border-color: var(--burgundy);
+  background: var(--burgundy);
+  color: #fff;
+}
+
+.gap {
+  color: var(--muted);
+}
