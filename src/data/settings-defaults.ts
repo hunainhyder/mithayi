@@ -272,6 +272,9 @@ export const defaultSettings = {
   ] as LinkItem[],
   nav_search_label: "Search",
   nav_cart_label: "Cart",
+  nav_menu_label: "Menu",
+  nav_shop_all_label: "Shop all products",
+  nav_more_label: "More collections",
 
   // ── Global: footer ──
   footer_tagline:

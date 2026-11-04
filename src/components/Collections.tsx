@@ -1,15 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getCategories, getSettings } from "@/lib/data";
+import { getCategoryTree, getSettings } from "@/lib/data";
 import { ArrowRightIcon } from "./Icons";
 import Title from "./Title";
 import styles from "./Collections.module.css";
 
 export default async function Collections() {
-  const [{ data: categories }, s] = await Promise.all([
-    getCategories({ sort: "newest", per_page: 6 }),
-    getSettings(),
-  ]);
+  const [tree, s] = await Promise.all([getCategoryTree(), getSettings()]);
+  // Top-level categories only; sub-categories are reached through their parent
+  const categories = tree.slice(0, 6);
 
   if (categories.length === 0) return null;
 

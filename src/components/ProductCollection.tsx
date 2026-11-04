@@ -1,16 +1,17 @@
 import Link from "next/link";
-import { getCategories, getFeaturedProducts, getSettings } from "@/lib/data";
+import { getCategoryTree, getFeaturedProducts, getSettings } from "@/lib/data";
 import { ArrowRightIcon } from "./Icons";
 import ProductCard from "./ProductCard";
 import Title from "./Title";
 import styles from "./ProductCollection.module.css";
 
 export default async function ProductCollection() {
-  const [products, { data: categories }, s] = await Promise.all([
+  const [products, tree, s] = await Promise.all([
     getFeaturedProducts(),
-    getCategories({ sort: "most_products", per_page: 8 }),
+    getCategoryTree(),
     getSettings(),
   ]);
+  const categories = tree.slice(0, 8);
 
   if (products.length === 0) return null;
 

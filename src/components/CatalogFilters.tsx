@@ -1,5 +1,5 @@
 import { PRODUCT_SORTS, type CatalogFilters as Filters } from "@/lib/catalog";
-import type { Category } from "@/types/api";
+import type { CategoryNode } from "@/lib/categories";
 import { SearchIcon } from "./Icons";
 import styles from "./CatalogFilters.module.css";
 
@@ -8,7 +8,7 @@ interface CatalogFiltersProps {
   action: string;
   filters: Filters;
   /** When given, a category select is shown (not needed on a category page) */
-  categories?: Category[];
+  categories?: CategoryNode[];
 }
 
 /** A plain GET form, so filtering works without client JavaScript. */
@@ -37,11 +37,24 @@ export default function CatalogFilters({
           <span className={styles.label}>Category</span>
           <select name="category" defaultValue={filters.category ?? ""}>
             <option value="">All categories</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
+            {categories.map((category) =>
+              category.children.length > 0 ? (
+                <optgroup key={category.id} label={category.name}>
+                  {category.products_count > 0 && (
+                    <option value={category.id}>All {category.name}</option>
+                  )}
+                  {category.children.map((child) => (
+                    <option key={child.id} value={child.id}>
+                      {child.name}
+                    </option>
+                  ))}
+                </optgroup>
+              ) : (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ),
+            )}
           </select>
         </label>
       )}

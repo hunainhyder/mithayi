@@ -11,21 +11,21 @@ import {
   parseCatalogParams,
   type SearchParams,
 } from "@/lib/catalog";
-import { getCategories, getProducts, getSettings } from "@/lib/data";
+import { getCategoryTree, getProducts, getSettings } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Shop" };
 
 async function Catalog({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const filters = parseCatalogParams(await searchParams);
-  const [products, categories, s] = await Promise.all([
+  const [products, categoryTree, s] = await Promise.all([
     getProducts(filtersToProductQuery(filters)),
-    getCategories({ sort: "alpha_asc", per_page: 100 }),
+    getCategoryTree(),
     getSettings(),
   ]);
 
   return (
     <>
-      <CatalogFilters action="/products" filters={filters} categories={categories.data} />
+      <CatalogFilters action="/products" filters={filters} categories={categoryTree} />
       <p className="resultCount">
         {products.meta.total}{" "}
         {products.meta.total === 1 ? s.shop_result_singular : s.shop_result_plural}

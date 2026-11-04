@@ -27,6 +27,8 @@ export interface Category {
   description: string | null;
   is_featured: boolean;
   products_count: number;
+  /** Not returned by the API yet; the tree builder uses it when it appears */
+  parent_id?: number | null;
   image?: ApiImage | null;
   secondary_image?: ApiImage | null;
   created_at: string;

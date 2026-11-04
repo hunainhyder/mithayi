@@ -1,6 +1,7 @@
 import { cacheLife } from "next/cache";
 import { apiFetch, NotFoundError, toQuery } from "@/lib/api";
 import { defaultSettings } from "@/data/settings-defaults";
+import { buildCategoryTree } from "@/lib/categories";
 import { resolveSettings } from "@/lib/settings";
 import type {
   Category,
@@ -154,4 +155,12 @@ export async function getSettings() {
   } catch {
     return resolveSettings(defaultSettings);
   }
+}
+
+/** Every category grouped into top-level categories with their sub-categories. */
+export async function getCategoryTree() {
+  "use cache";
+  cacheLife("minutes");
+  const { data } = await getCategories({ per_page: 100 });
+  return buildCategoryTree(data);
 }

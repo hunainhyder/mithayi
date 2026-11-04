@@ -432,6 +432,9 @@ const mithayi: TenantSchema = {
                         },
                         { key: 'nav_search_label', label: 'Search Button Label', type: 'text' },
                         { key: 'nav_cart_label', label: 'Cart Button Label', type: 'text' },
+                        { key: 'nav_menu_label', label: 'Phone Menu Button Label', type: 'text' },
+                        { key: 'nav_shop_all_label', label: 'Shop Menu: "Shop all" Link Text', type: 'text' },
+                        { key: 'nav_more_label', label: 'Shop Menu: Heading for Categories Without Sub-categories', type: 'text' },
                     ],
                 },
                 {
