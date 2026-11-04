@@ -1,5 +1,7 @@
 import { cacheLife } from "next/cache";
 import { apiFetch, NotFoundError, toQuery } from "@/lib/api";
+import { defaultSettings } from "@/data/settings-defaults";
+import { resolveSettings } from "@/lib/settings";
 import type {
   Category,
   CategoryMeta,
@@ -137,5 +139,19 @@ export async function getFaqs() {
     return Array.isArray(res) ? res : res.data;
   } catch {
     return [];
+  }
+}
+
+/**
+ * Tenant settings from GET /api/settings, merged over the built-in defaults.
+ * Falls back to the defaults entirely when the API is unreachable.
+ */
+export async function getSettings() {
+  "use cache";
+  cacheLife("minutes");
+  try {
+    return resolveSettings(await apiFetch<unknown>("settings"));
+  } catch {
+    return resolveSettings(defaultSettings);
   }
 }

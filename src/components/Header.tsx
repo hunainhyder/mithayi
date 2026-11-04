@@ -1,32 +1,52 @@
+import Image from "next/image";
 import Link from "next/link";
-import { navLinks } from "@/data/site";
+import { getSettings } from "@/lib/data";
 import CartButton from "./CartButton";
 import { ChevronDownIcon, SearchIcon } from "./Icons";
 import styles from "./Header.module.css";
 
-export default function Header() {
+export default async function Header() {
+  const settings = await getSettings();
+
   return (
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
         <nav className={styles.nav} aria-label="Primary">
-          {navLinks.map((link) => (
-            <Link key={link.label} href={link.href} className={styles.link}>
+          {settings.nav_links.map((link) => (
+            <Link key={link.label} href={link.url} className={styles.link}>
               {link.label}
-              {link.hasMenu && <ChevronDownIcon size={12} />}
+              {link.url === "/products" && <ChevronDownIcon size={12} />}
             </Link>
           ))}
         </nav>
 
-        <Link href="/" className={styles.logo} aria-label="Mithayi home">
-          <span className={styles.wordmark}>Mithayi</span>
-          <span className={styles.tagline}>Est. with love</span>
+        <Link href="/" className={styles.logo} aria-label={`${settings.site_wordmark} home`}>
+          {settings.site_logo ? (
+            <Image
+              src={settings.site_logo}
+              alt={settings.site_wordmark}
+              width={160}
+              height={48}
+              priority
+              style={{ width: "auto", height: 48 }}
+            />
+          ) : (
+            <span className={styles.wordmark}>{settings.site_wordmark}</span>
+          )}
+          {settings.site_tagline && (
+            <span className={styles.tagline}>{settings.site_tagline}</span>
+          )}
         </Link>
 
         <div className={styles.actions}>
-          <Link href="/products#search" className={styles.iconButton} aria-label="Search">
+          <Link
+            href="/products#search"
+            className={styles.iconButton}
+            aria-label={settings.nav_search_label}
+          >
             <SearchIcon size={18} />
           </Link>
-          <CartButton />
+          <CartButton label={settings.nav_cart_label} />
         </div>
       </div>
     </header>

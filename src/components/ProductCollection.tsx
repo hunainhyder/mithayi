@@ -1,13 +1,15 @@
 import Link from "next/link";
-import { getCategories, getFeaturedProducts } from "@/lib/data";
+import { getCategories, getFeaturedProducts, getSettings } from "@/lib/data";
 import { ArrowRightIcon } from "./Icons";
 import ProductCard from "./ProductCard";
+import Title from "./Title";
 import styles from "./ProductCollection.module.css";
 
 export default async function ProductCollection() {
-  const [products, { data: categories }] = await Promise.all([
+  const [products, { data: categories }, s] = await Promise.all([
     getFeaturedProducts(),
     getCategories({ sort: "most_products", per_page: 8 }),
+    getSettings(),
   ]);
 
   if (products.length === 0) return null;
@@ -17,14 +19,17 @@ export default async function ProductCollection() {
       <div className="container">
         <header className={styles.header}>
           <div className={styles.heading}>
-            <p className="eyebrow">Loved for a reason</p>
+            <p className="eyebrow">{s.favourites_eyebrow}</p>
             <h2 className="section-title">
-              Our <em>favourites.</em>
+              <Title text={s.favourites_title} accent={s.favourites_title_accent} inline />
             </h2>
+            {s.favourites_description && <p>{s.favourites_description}</p>}
           </div>
-          <Link href="/products" className={styles.viewAll}>
-            View all favourites <ArrowRightIcon size={14} />
-          </Link>
+          {s.favourites_button_text && (
+            <Link href="/products" className={styles.viewAll}>
+              {s.favourites_button_text} <ArrowRightIcon size={14} />
+            </Link>
+          )}
         </header>
 
         <ul className={styles.filters}>

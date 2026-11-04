@@ -5,13 +5,29 @@ import { useState, type FormEvent } from "react";
 import { useCart, useHydrated, usePromo } from "@/hooks/useCart";
 import { ApiError, ValidationError, apiFetch } from "@/lib/api";
 import { formatPrice } from "@/lib/format";
-import { shippingMethods } from "@/data/shipping";
+import type { ShippingMethod } from "@/lib/settings";
 import type { CheckoutPayload, CheckoutResponse } from "@/types/api";
 import PromoCode from "./PromoCode";
 import form from "./Form.module.css";
 import styles from "./CheckoutForm.module.css";
 
-export default function CheckoutForm() {
+export interface CheckoutCopy {
+  emptyMessage: string;
+  emptyButtonText: string;
+  successEyebrow: string;
+  successTitle: string;
+  successTitleAccent: string;
+  /** Overrides the message returned by the checkout API when set */
+  successMessage: string;
+}
+
+export default function CheckoutForm({
+  shippingMethods,
+  copy,
+}: {
+  shippingMethods: ShippingMethod[];
+  copy: CheckoutCopy;
+}) {
   const hydrated = useHydrated();
   const { items, subtotal, clearCart } = useCart();
   const { promo } = usePromo();
@@ -79,12 +95,12 @@ export default function CheckoutForm() {
   if (order) {
     return (
       <div className={styles.confirmation}>
-        <p className="eyebrow">Order placed</p>
+        <p className="eyebrow">{copy.successEyebrow}</p>
         <h2 className="section-title">
-          Thank you, <em>it&rsquo;s on its way.</em>
+          {copy.successTitle} <em>{copy.successTitleAccent}</em>
         </h2>
         <p>
-          {order.message} Your order number is <strong>#{order.order_id}</strong>.
+          {copy.successMessage || order.message} Your order number is <strong>#{order.order_id}</strong>.
         </p>
         <dl className={styles.totals}>
           <div>
@@ -121,9 +137,9 @@ export default function CheckoutForm() {
   if (items.length === 0) {
     return (
       <div className={styles.empty}>
-        <p>Your cart is empty.</p>
+        <p>{copy.emptyMessage}</p>
         <Link href="/products" className={form.submit}>
-          Start shopping
+          {copy.emptyButtonText}
         </Link>
       </div>
     );

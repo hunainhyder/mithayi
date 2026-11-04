@@ -5,7 +5,13 @@ import { ApiError, ValidationError, apiFetch } from "@/lib/api";
 import type { EnquiryPayload } from "@/types/api";
 import form from "./Form.module.css";
 
-export default function EnquiryForm() {
+export default function EnquiryForm({
+  submitText,
+  successMessage,
+}: {
+  submitText: string;
+  successMessage: string;
+}) {
   const [pending, setPending] = useState(false);
   const [done, setDone] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -44,7 +50,7 @@ export default function EnquiryForm() {
   if (done) {
     return (
       <p className={`${form.status} ${form.success}`} role="status">
-        Thank you for getting in touch. We&rsquo;ll reply as soon as we can.
+        {successMessage}
       </p>
     );
   }
@@ -90,7 +96,7 @@ export default function EnquiryForm() {
         </p>
       )}
       <button type="submit" className={form.submit} disabled={pending}>
-        {pending ? "Sending…" : "Send message"}
+        {pending ? "Sending…" : submitText}
       </button>
     </form>
   );

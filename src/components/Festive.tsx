@@ -1,15 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getSettings } from "@/lib/data";
 import { ArrowRightIcon } from "./Icons";
+import { Lines } from "./Title";
 import styles from "./Festive.module.css";
 
-export default function Festive() {
+export default async function Festive() {
+  const s = await getSettings();
+
   return (
     <section id="festive" className={styles.section}>
       <div className={styles.media}>
         <Image
-          src="/images/festive.jpg"
-          alt="A green and gold box of festive mithai beside a lantern"
+          src={s.festive_image}
+          alt={s.festive_image_alt}
           fill
           sizes="(max-width: 900px) 100vw, 60vw"
           className={styles.image}
@@ -17,22 +21,22 @@ export default function Festive() {
       </div>
 
       <div className={`container ${styles.content}`}>
-        <p className={styles.eyebrow}>For the moments that matter</p>
+        <p className={styles.eyebrow}>{s.festive_eyebrow}</p>
         <h2 className={styles.title}>
-          Every celebration
+          {s.festive_title_line_1}
           <br />
-          tastes <em>sweeter</em>
+          {s.festive_title_line_2_before} <em>{s.festive_title_accent}</em>
           <br />
-          together.
+          {s.festive_title_line_3}
         </h2>
         <p className={styles.text}>
-          From the first moon sighting to the last dance,
-          <br />
-          make their day a little more magical.
+          <Lines text={s.festive_description} />
         </p>
-        <Link href="#gifting" className={styles.button}>
-          Explore festive gifts <ArrowRightIcon size={14} />
-        </Link>
+        {s.festive_button_text && (
+          <Link href={s.festive_button_url} className={styles.button}>
+            {s.festive_button_text} <ArrowRightIcon size={14} />
+          </Link>
+        )}
       </div>
     </section>
   );

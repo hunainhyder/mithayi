@@ -1,18 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import { giftSlides, giftSlideTotal } from "@/data/gifting";
+import { getSettings } from "@/lib/data";
 import { ArrowLeftIcon, ArrowRightIcon } from "./Icons";
+import Title from "./Title";
 import styles from "./Gifting.module.css";
 
-export default function Gifting() {
+export default async function Gifting() {
+  const s = await getSettings();
+  const slides = s.gifting_slides;
+
   return (
     <section id="gifting" className={styles.section}>
       <div className="container">
         <header className={styles.header}>
           <div className={styles.heading}>
-            <p className="eyebrow">A little joy, beautifully wrapped</p>
+            <p className="eyebrow">{s.gifting_eyebrow}</p>
             <h2 className="section-title">
-              The art of <em>giving.</em>
+              <Title text={s.gifting_title} accent={s.gifting_title_accent} inline />
             </h2>
           </div>
           <div className={styles.arrows}>
@@ -26,9 +30,9 @@ export default function Gifting() {
         </header>
 
         <ul className={styles.cards}>
-          {giftSlides.map((slide, i) => (
+          {slides.map((slide, i) => (
             <li
-              key={slide.id}
+              key={`${slide.kicker}-${i}`}
               className={`${styles.card} ${i === 0 ? styles.wide : styles.narrow}`}
             >
               <div className={styles.media}>
@@ -44,13 +48,15 @@ export default function Gifting() {
               <div className={styles.caption}>
                 <p className={styles.kicker}>{slide.kicker}</p>
                 <h3 className={styles.title}>
-                  {slide.title.map((line) => (
+                  {[slide.title_line_1, slide.title_line_2].filter(Boolean).map((line) => (
                     <span key={line}>{line}</span>
                   ))}
                 </h3>
-                <Link href={slide.href} className={styles.cta}>
-                  {slide.cta} <ArrowRightIcon size={13} />
-                </Link>
+                {slide.button_text && (
+                  <Link href={slide.button_url || "#"} className={styles.cta}>
+                    {slide.button_text} <ArrowRightIcon size={13} />
+                  </Link>
+                )}
               </div>
             </li>
           ))}
@@ -61,7 +67,7 @@ export default function Gifting() {
           <span className={styles.track}>
             <span className={styles.fill} />
           </span>
-          <span>{String(giftSlideTotal).padStart(2, "0")}</span>
+          <span>{String(slides.length).padStart(2, "0")}</span>
         </div>
       </div>
     </section>

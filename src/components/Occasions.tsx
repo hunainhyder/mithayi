@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { occasions } from "@/data/occasions";
-import type { OccasionIcon } from "@/types";
+import { getSettings } from "@/lib/data";
+import { toOccasionIcon, type OccasionIcon } from "@/lib/settings";
 import {
   ArrowRightIcon,
   AsteriskIcon,
@@ -8,6 +8,7 @@ import {
   MoonIcon,
   SparkleIcon,
 } from "./Icons";
+import Title from "./Title";
 import styles from "./Occasions.module.css";
 
 function OccasionGlyph({ icon }: { icon: OccasionIcon }) {
@@ -27,23 +28,25 @@ function OccasionGlyph({ icon }: { icon: OccasionIcon }) {
   }
 }
 
-export default function Occasions() {
+export default async function Occasions() {
+  const s = await getSettings();
+
   return (
     <section className={styles.section}>
       <div className="container">
         <header className={styles.header}>
-          <p className="eyebrow">Sweetness for every story</p>
+          <p className="eyebrow">{s.occasions_eyebrow}</p>
           <h2 className="section-title">
-            What are we <em>celebrating?</em>
+            <Title text={s.occasions_title} accent={s.occasions_title_accent} inline />
           </h2>
         </header>
 
         <ul className={styles.grid}>
-          {occasions.map((occasion) => (
-            <li key={occasion.id} className={styles.cell}>
-              <Link href={occasion.href} className={styles.link}>
+          {s.occasions_list.map((occasion, i) => (
+            <li key={`${occasion.name}-${i}`} className={styles.cell}>
+              <Link href={occasion.url || "#"} className={styles.link}>
                 <span className={styles.icon}>
-                  <OccasionGlyph icon={occasion.icon} />
+                  <OccasionGlyph icon={toOccasionIcon(occasion.icon)} />
                 </span>
                 <span className={styles.name}>{occasion.name}</span>
                 <ArrowRightIcon size={14} />

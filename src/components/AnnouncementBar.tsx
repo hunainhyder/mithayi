@@ -1,13 +1,15 @@
-import { announcements } from "@/data/site";
+import { getSettings } from "@/lib/data";
 import styles from "./AnnouncementBar.module.css";
 
-export default function AnnouncementBar() {
+export default async function AnnouncementBar() {
+  const { site_announcements } = await getSettings();
+
   return (
     <div className={styles.bar}>
       <ul className={styles.list}>
-        {announcements.map((text, i) => (
+        {site_announcements.map((item, i) => (
           <li key={i} className={styles.item}>
-            {text}
+            {item.text}
           </li>
         ))}
       </ul>

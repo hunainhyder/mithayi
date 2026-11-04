@@ -7,7 +7,13 @@ import { formatPrice } from "@/lib/format";
 import PromoCode from "./PromoCode";
 import styles from "./CartView.module.css";
 
-export default function CartView() {
+export default function CartView({
+  emptyMessage,
+  emptyButtonText,
+}: {
+  emptyMessage: string;
+  emptyButtonText: string;
+}) {
   const hydrated = useHydrated();
   const { items, subtotal, setQuantity, removeItem } = useCart();
   const { promo } = usePromo();
@@ -20,9 +26,9 @@ export default function CartView() {
   if (items.length === 0) {
     return (
       <div className={styles.empty}>
-        <p>Your cart is empty.</p>
+        <p>{emptyMessage}</p>
         <Link href="/products" className={styles.primary}>
-          Start shopping
+          {emptyButtonText}
         </Link>
       </div>
     );

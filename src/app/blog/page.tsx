@@ -4,9 +4,10 @@ import BlogFilters from "@/components/BlogFilters";
 import PageHeader from "@/components/PageHeader";
 import Pagination from "@/components/Pagination";
 import PostCard from "@/components/PostCard";
+import Title from "@/components/Title";
 import { blogFiltersToParams, blogFiltersToQuery, parseBlogParams } from "@/lib/blog";
 import type { SearchParams } from "@/lib/catalog";
-import { getPosts } from "@/lib/data";
+import { getPosts, getSettings } from "@/lib/data";
 import styles from "./blog.module.css";
 
 export const metadata: Metadata = {
@@ -14,7 +15,13 @@ export const metadata: Metadata = {
   description: "Stories, gifting ideas and the craft behind every sweet.",
 };
 
-async function Posts({ searchParams }: { searchParams: Promise<SearchParams> }) {
+async function Posts({
+  searchParams,
+  emptyMessage,
+}: {
+  searchParams: Promise<SearchParams>;
+  emptyMessage: string;
+}) {
   const filters = parseBlogParams(await searchParams);
   const posts = await getPosts(blogFiltersToQuery(filters));
 
@@ -22,7 +29,7 @@ async function Posts({ searchParams }: { searchParams: Promise<SearchParams> }) 
     <>
       <BlogFilters filters={filters} />
       {posts.data.length === 0 ? (
-        <p className={styles.empty}>No stories found. Check back soon.</p>
+        <p className={styles.empty}>{emptyMessage}</p>
       ) : (
         <ul className={styles.grid}>
           {posts.data.map((post) => (
@@ -37,21 +44,24 @@ async function Posts({ searchParams }: { searchParams: Promise<SearchParams> }) 
   );
 }
 
-export default function BlogPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  const s = await getSettings();
+
   return (
     <>
       <PageHeader
-        eyebrow="The journal"
-        title={
-          <>
-            Stories worth <em>sharing.</em>
-          </>
-        }
-        description="Gifting ideas, festive guides and the craft behind every sweet."
+        eyebrow={s.blog_hero_eyebrow}
+        title={<Title text={s.blog_hero_title} accent={s.blog_hero_title_accent} inline />}
+        description={s.blog_hero_description}
+        image={s.blog_hero_image}
       />
       <div className="container pageBody">
         <Suspense fallback={<div className={styles.loading} aria-hidden="true" />}>
-          <Posts searchParams={searchParams} />
+          <Posts searchParams={searchParams} emptyMessage={s.blog_empty_message} />
         </Suspense>
       </div>
     </>

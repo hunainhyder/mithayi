@@ -90,3 +90,30 @@
     align-items: flex-start;
   }
 }
+
+.contact {
+  display: grid;
+  gap: 4px;
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-style: normal;
+  color: rgb(255 255 255 / 0.8);
+}
+
+.contact a {
+  color: inherit;
+}
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 16px;
+  font-size: 0.9rem;
+}
+
+.social a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
